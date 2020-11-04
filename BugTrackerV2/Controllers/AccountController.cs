@@ -161,6 +161,8 @@ namespace BugTrackerV2.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    //Sets default role of submitter
+                    UserManager.AddToRole(user.Id, "Submitter");
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
@@ -383,6 +385,8 @@ namespace BugTrackerV2.Controllers
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
+                    //Default role for external login registration
+                    UserManager.AddToRole(user.Id, "Submitter");
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {
