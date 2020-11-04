@@ -1,5 +1,6 @@
 namespace BugTrackerV2.Migrations
 {
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -19,6 +20,13 @@ namespace BugTrackerV2.Migrations
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
+
+            context.Roles.Add(new IdentityRole { Name = "Admin" });
+            context.Roles.Add(new IdentityRole { Name = "Manager" });
+            context.Roles.Add(new IdentityRole { Name = "Developer" });
+            context.Roles.Add(new IdentityRole { Name = "Submitter" });
+
+            context.SaveChanges();
         }
     }
 }
