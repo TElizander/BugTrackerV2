@@ -7,13 +7,13 @@ namespace BugTrackerV2.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class addUserSeed : IMigrationMetadata
+    public sealed partial class AddDemoAccountSeedData : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addUserSeed));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddDemoAccountSeedData));
         
         string IMigrationMetadata.Id
         {
-            get { return "202011040912421_addUserSeed"; }
+            get { return "202011050854155_AddDemoAccountSeedData"; }
         }
         
         string IMigrationMetadata.Source

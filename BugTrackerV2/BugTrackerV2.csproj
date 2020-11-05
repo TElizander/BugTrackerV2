@@ -195,9 +195,9 @@
     <Compile Include="Migrations\202010290643470_FixTicketCommentUserDataType.Designer.cs">
       <DependentUpon>202010290643470_FixTicketCommentUserDataType.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202011040912421_addUserSeed.cs" />
-    <Compile Include="Migrations\202011040912421_addUserSeed.Designer.cs">
-      <DependentUpon>202011040912421_addUserSeed.cs</DependentUpon>
+    <Compile Include="Migrations\202011050854155_AddDemoAccountSeedData.cs" />
+    <Compile Include="Migrations\202011050854155_AddDemoAccountSeedData.Designer.cs">
+      <DependentUpon>202011050854155_AddDemoAccountSeedData.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -295,8 +295,8 @@
     <EmbeddedResource Include="Migrations\202010290643470_FixTicketCommentUserDataType.resx">
       <DependentUpon>202010290643470_FixTicketCommentUserDataType.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011040912421_addUserSeed.resx">
-      <DependentUpon>202011040912421_addUserSeed.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202011050854155_AddDemoAccountSeedData.resx">
+      <DependentUpon>202011050854155_AddDemoAccountSeedData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

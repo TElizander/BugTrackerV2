@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using BugTrackerV2.Models;
+using System.Configuration;
 
 namespace BugTrackerV2.Controllers
 {
@@ -385,8 +386,10 @@ namespace BugTrackerV2.Controllers
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
-                    //Default role for external login registration
-                    UserManager.AddToRole(user.Id, "Submitter");
+                    if (UserManager.FindByName(model.Email) == null)
+                    {
+                        UserManager.AddToRole(user.Id, "Submitter");
+                    }  
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {
@@ -399,6 +402,31 @@ namespace BugTrackerV2.Controllers
 
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
+        }
+        //
+        // POST: /Account/DemonstrationLogin
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DemonstrationLogin(LoginViewModel model, string returnUrl, string role)
+        {
+            // This doesn't count login failures towards account lockout
+            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            var demoPassword = ConfigurationManager.AppSettings["DemoPassword"];
+            var result = await SignInManager.PasswordSignInAsync(role, demoPassword, model.RememberMe, shouldLockout: false);
+            switch (result)
+            {
+                case SignInStatus.Success:
+                    return RedirectToLocal(returnUrl);
+                case SignInStatus.LockedOut:
+                    return View("Lockout");
+                case SignInStatus.RequiresVerification:
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                case SignInStatus.Failure:
+                default:
+                    ModelState.AddModelError("", "Invalid login attempt.");
+                    return RedirectToAction("Login", model);
+            }
         }
 
         //
