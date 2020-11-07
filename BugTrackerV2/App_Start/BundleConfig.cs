@@ -25,6 +25,20 @@ namespace BugTrackerV2
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/font-sb").Include(
+                     "~/Content/all.min.css",
+                     "~/Content/sb-admin-2.min.css"));
+            //
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap-core").Include(
+                      "~/Scripts/jquery.min.js",
+                      "~/Scripts/bootstrap.bundle.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/core-plugin").Include(
+                      "~/Scripts/jquery.easing.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/custom-all").Include(
+                      "~/Scripts/sb-admin-2.min.js"));
         }
     }
 }
