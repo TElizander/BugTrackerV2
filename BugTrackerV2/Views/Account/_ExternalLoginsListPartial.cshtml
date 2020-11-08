@@ -15,17 +15,18 @@
     }
     else
     {
-        using (Html.BeginForm("ExternalLogin", "Account",FormMethod.Post, new { @class = "user", role = "form", ReturnUrl = Model.ReturnUrl }))
+        using (Html.BeginForm("ExternalLogin", "Account", FormMethod.Post, new { @class = "user", role = "form", ReturnUrl = Model.ReturnUrl }))
         {
             @Html.AntiForgeryToken()
             <div id="socialLoginList" class="form-group">
                 <p>
                     @foreach (AuthenticationDescription p in loginProviders)
                     {
-                        <button type="submit" class="btn btn-user btn-@(p.AuthenticationType.ToLower()) btn-block" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"><i class="fab fa-@(p.AuthenticationType.ToLower()) fa-fw"></i>Login with @p.AuthenticationType</button>
+                        <button type="submit" class="btn btn-user btn-@(p.AuthenticationType.ToLower()) btn-block" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"><i class="fab fa-@(p.AuthenticationType.ToLower()) fa-fw"></i> Login with @p.AuthenticationType</button>
                     }
                 </p>
             </div>
         }
+        
     }
 }

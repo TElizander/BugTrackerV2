@@ -41,23 +41,40 @@
                                     </div>
                                     <input type="submit" value="Log in" class="btn btn-primary btn-user btn-block" />
 
-                                    <hr />
-
                                     @* Enable this once you have account confirmation enabled for password reset functionality
             <p>
                 @Html.ActionLink("Forgot your password?", "ForgotPassword")
             </p>*@
                                 }
-                                @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+
+                                <div class="text-center">
+                                    @Html.ActionLink("Create an Account!", "Register", "Account", new { @class = "small" })
+                                </div>
+
                                 <hr />
+                                @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+
+                                <hr />
+
+                                <div class="text-center">
+                                    <h1 class="h5 text-gray-900 mb-4">Demo Mode</h1>
+                                </div>
+                                @using (Html.BeginForm("DemonstrationLogin", "Account", FormMethod.Post, new { @class = "user", role = "form", ReturnUrl = ViewBag.ReturnUrl }))
+                                {@Html.AntiForgeryToken()
+
+                                <div id="demonstrationLoginList">
+                                    <button type="submit" class="btn btn-user btn-danger btn-block" id="Admin" name="role" value="Admin" title="Log in using a demo admin account">Admin</button>
+                                    <button type="submit" class="btn btn-user btn-primary btn-block" id="Manager" name="role" value="Manager" title="Log in using a demo project manager account">Project Manager</button>
+                                    <button type="submit" class="btn btn-user btn-warning btn-block" id="Developer" name="role" value="Developer" title="Log in using a demo developer account">Developer</button>
+                                    <button type="submit" class="btn btn-user btn-info btn-block" id="Submitter" name="role" value="Submitter" title="Log in using a demo submitter account">Submitter</button>
+                                </div>
+
+                                }
                                 <!--
     <div class="text-center">
         <a class="small" href="forgot-password.html">Forgot Password?</a>
     </div>
         -->
-                                <div class="text-center">
-                                    @Html.ActionLink("Create an Account!", "Register", "Account", new { @class = "small" })
-                                </div>
                             </div>
                         </div>
                     </div>
