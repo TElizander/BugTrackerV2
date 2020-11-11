@@ -79,6 +79,5 @@ namespace BugTrackerV2.Models
             return new ApplicationDbContext();
         }
 
-
     }
 }
