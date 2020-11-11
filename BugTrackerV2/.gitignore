@@ -256,3 +256,5 @@ _Pvt_Extensions
 
 /packages/
 !packages/repositories.config
+
+/webfonts/

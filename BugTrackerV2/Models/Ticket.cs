@@ -43,5 +43,6 @@ namespace BugTrackerV2.Models
         public virtual ApplicationUser Owner { get; set; }                                                 //Child
         public virtual ICollection<TicketComment> TicketComments { get; set; }                  //Child
         public virtual ICollection<TicketAttachment> TicketAttachments { get; set; }            //Child
+        public virtual ICollection<TicketAction> TicketActions { get; set; }
     }
 }
