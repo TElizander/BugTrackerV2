@@ -1,49 +1,57 @@
 ﻿@using BugTrackerV2.Models
 @model Ticket
 
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Create Ticket</h1>
-</div>
 
-<div class="row">
+<div class="container">
 
-    <div class="col-xs-12 col-xl-10">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
 
-        <!-- Basic Card Example -->
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Basic Card Example</h6>
+        <div class="col-xl-10 col-lg-12 col-md-9">
+
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                <div>
+                                    <h1 class="h4 text-gray-900 mb-4">Create a Ticket</h1>
+                                </div>
+                                @using (Html.BeginForm("Create", "Ticket", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "user", role = "form" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(m => m.Subject, new { @class = "form-control", placeholder = "Subject" })
+                                        @Html.ValidationMessageFor(m => m.Subject, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.TextAreaFor(m => m.Description, new { @rows = "3", @class = "form-control", placeholder = "Description" })
+                                        @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.EnumDropDownListFor(m => m.Environment, "Select Environment", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.Environment, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.EnumDropDownListFor(m => m.Priority, "Select Priority Level", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.Priority, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div>
+                                        @Html.TextBox("file", "", new { type = "file" }) <br />
+                                    </div>
+                                    <br />
+                                    <input type="submit" value="Submit" class="btn-primary btn-user btn-block" />
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                @using (Html.BeginForm("Create", "Ticket", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "user", role = "form" }))
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group">
-                        @Html.TextBoxFor(m => m.Subject, new { @class = "form-control", placeholder = "Subject" })
-                        @Html.ValidationMessageFor(m => m.Subject, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="form-group">
-                        @Html.TextBoxFor(m => m.Description, new { @class = "form-control", placeholder = "Description" })
-                        @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="form-group">
-                        @Html.EnumDropDownListFor(m => m.Environment, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Environment, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="form-group">
-                        @Html.EnumDropDownListFor(m => m.Priority, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Priority, "", new { @class = "text-danger" })
-                    </div>
-                    <div>
-                        @Html.TextBox("file", "", new { type = "file" }) <br />
-                    </div>
-                    <br />
-                    <input type="submit" value="Submit" class="btn-primary btn-user btn-block" />}
-            </div>
+
         </div>
 
     </div>
-
-
 </div>
+@Scripts.Render("~/bundles/jqueryval")

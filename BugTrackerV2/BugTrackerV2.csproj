@@ -301,6 +301,7 @@
     <Content Include="webfonts\fa-solid-900.woff2" />
     <Content Include="webfonts\fa-brands-400.eot" />
     <Content Include="Views\Ticket\Create.cshtml" />
+    <Content Include="Views\Ticket\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

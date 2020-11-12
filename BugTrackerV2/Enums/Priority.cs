@@ -8,8 +8,8 @@ namespace BugTrackerV2.Enums
     public enum Priority
     {
         Low = 1,
-        Medium,
-        High,
-        Critical
+        Medium = 2,
+        High = 3,
+        Critical = 4
     }
 }

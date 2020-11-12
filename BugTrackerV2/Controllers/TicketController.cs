@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BugTrackerV2.Models;
+using Microsoft.Owin.Security.OAuth;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +10,8 @@ namespace BugTrackerV2.Controllers
 {
     public class TicketController : Controller
     {
+        private  ApplicationDbContext db = new ApplicationDbContext();
+
         // GET: Ticket
         public ActionResult Index()
         {
@@ -28,17 +32,20 @@ namespace BugTrackerV2.Controllers
 
         // POST: Ticket/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Subject,Description,Environment,Priority")] Ticket ticket)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            ticket.SubmitterID = "3";
+            ticket.SubmitDate = System.DateTime.Now;
 
-                return RedirectToAction("Index");
-            }
-            catch
+            if (ModelState.IsValid)
             {
-                return View();
+                db.Ticket.Add(ticket);
+                db.
+                db.SaveChanges();
+                return RedirectToAction("Details", new { id = ticket.TicketID });
+            }
+            return View(ticket); return View();
             }
         }
 

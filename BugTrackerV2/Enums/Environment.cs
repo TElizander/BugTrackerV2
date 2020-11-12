@@ -7,8 +7,8 @@ namespace BugTrackerV2.Enums
 {
     public enum Environment
     {
-        Testing,
-        Staging,
-        Production
+        Testing = 1,
+        Staging = 2,
+        Production = 3
     }
 }

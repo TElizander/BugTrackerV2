@@ -26,8 +26,10 @@ namespace BugTrackerV2.Models
         [StringLength(2500, MinimumLength = 10)]
         public string Description { get; set; }
         [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Select a valid environment")]
         public Environment Environment { get; set; }
         [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Select a valid priority level")]
         public Priority Priority { get; set; }
         [Required]
         public Status Status { get; set; }
