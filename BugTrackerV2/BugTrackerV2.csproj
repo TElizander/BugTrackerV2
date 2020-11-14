@@ -205,6 +205,10 @@
     <Compile Include="Migrations\202011110917567_Add TicketAction.Designer.cs">
       <DependentUpon>202011110917567_Add TicketAction.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011140723390_FixDataModel.cs" />
+    <Compile Include="Migrations\202011140723390_FixDataModel.Designer.cs">
+      <DependentUpon>202011140723390_FixDataModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -301,7 +305,7 @@
     <Content Include="webfonts\fa-solid-900.woff2" />
     <Content Include="webfonts\fa-brands-400.eot" />
     <Content Include="Views\Ticket\Create.cshtml" />
-    <Content Include="Views\Ticket\Detail.cshtml" />
+    <Content Include="Views\Ticket\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -337,6 +341,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011110917567_Add TicketAction.resx">
       <DependentUpon>202011110917567_Add TicketAction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011140723390_FixDataModel.resx">
+      <DependentUpon>202011140723390_FixDataModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

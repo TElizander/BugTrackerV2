@@ -1,4 +1,5 @@
 ﻿using BugTrackerV2.Models;
+using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security.OAuth;
 using System;
 using System.Collections.Generic;
@@ -35,18 +36,16 @@ namespace BugTrackerV2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Subject,Description,Environment,Priority")] Ticket ticket)
         {
-            ticket.SubmitterID = "3";
+            ticket.SubmitterID = User.Identity.GetUserId();
             ticket.SubmitDate = System.DateTime.Now;
 
             if (ModelState.IsValid)
             {
-                db.Ticket.Add(ticket);
-                db.
+                db.Tickets.Add(ticket);
                 db.SaveChanges();
                 return RedirectToAction("Details", new { id = ticket.TicketID });
             }
-            return View(ticket); return View();
-            }
+            return View(ticket); 
         }
 
         // GET: Ticket/Edit/5

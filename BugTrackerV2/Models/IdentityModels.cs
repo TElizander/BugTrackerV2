@@ -49,9 +49,10 @@ namespace BugTrackerV2.Models
         {
         }
 
-        //public DbSet<Ticket> Tickets { get; set; }
-        //public DbSet<TicketAttachment> TicketAttachments { get; set; }
-        //public DbSet<TicketComment> TicketComments { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<TicketAttachment> TicketAttachments { get; set; }
+        public DbSet<TicketComment> TicketComments { get; set; }
+        public DbSet<TicketAction> TicketActions {get; set;}
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
