@@ -1,1 +1,65 @@
-﻿Ticket is detailed here!
+﻿@using BugTrackerV2.Models
+@model TicketDetailViewModel
+
+
+@*@Model.Description
+    <br />
+    @Model.Subject*@
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-4 text-gray-800">Ticket # @Model.TicketID</h1>
+
+    <div class="row">
+
+        <div class="col-lg-6">
+
+
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Ticket Details</h6>
+                </div>
+                <div class="card-body">
+                    <h6 class="m-0 font-weight-bold text-primary">Subject</h6>
+                    <p>@Model.Subject</p>
+                    <br />
+                    <h6 class="m-0 font-weight-bold text-primary">Description</h6>
+                    <p>@Model.Description</p>
+                    <br/>
+                    <h6 class="m-0 font-weight-bold text-primary">Status</h6>
+                    <p>@Model.Status</p>
+                </div>
+            </div>
+
+
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Attachments</h6>
+                </div>
+                <div class="card-body">
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-lg-6">
+
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Comments</h6>
+                </div>
+                <div class="card-body">
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+@Scripts.Render("~bundles/jquerycal")
+

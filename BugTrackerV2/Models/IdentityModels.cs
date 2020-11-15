@@ -27,6 +27,7 @@ namespace BugTrackerV2.Models
 
         //Navigation properties
 
+        //public virtual ICollection<ApplicationUser> ApplicationUsers { get; set; }
         public virtual ICollection<Ticket> TicketsSubmitted { get; set; }
         public virtual ICollection<Ticket> TicketsAssigned { get; set; }
         public virtual ICollection<TicketComment> TicketComments { get; set; }
