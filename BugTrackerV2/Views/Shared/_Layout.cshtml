@@ -19,6 +19,9 @@
     <!-- Custom styles for this template-->
     @Styles.Render("~/Content/font-sb")
 
+    <!--Custom styles for data tables-->
+    @Styles.Render("~/Content/data-tables")
+
 </head>
 
 <body id="page-top">
@@ -66,8 +69,8 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!--<h6 class="collapse-header">Custom Components:</h6>-->
                         @Html.ActionLink("Create Ticket", "Create", "Ticket", null, new { @class = "collapse-item" })
-                        <a class="collapse-item" href="cards.html">My Tickets</a>
-                        <a class="collapse-item" href="cards.html">All Tickets</a>
+                        @Html.ActionLink("My Tickets", "Index", "Ticket", null, new { @class = "collapse-item" })
+                        @Html.ActionLink("All Tickets", "Index", "Ticket", null, new { @class = "collapse-item" })
                     </div>
                 </div>
             </li>
@@ -363,6 +366,12 @@
 
     <!-- Custom scripts for all pages-->
     @Scripts.Render("~/bundles/custom-all")
+
+    <!--jQuery Validation-->
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <!--JS for datatables-->
+    @Scripts.Render("~/bundles/data-tables")
 
 </body>
 

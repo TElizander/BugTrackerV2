@@ -11,12 +11,13 @@
 
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">Ticket # @Model.TicketID</h1>
+    @Html.ActionLink("See All Tickets", "Index", "Ticket")
 
     <div class="row">
 
         <div class="col-lg-6">
 
-
+            <!--Ticket Detail Section-->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Ticket Details</h6>
@@ -27,13 +28,13 @@
                     <br />
                     <h6 class="m-0 font-weight-bold text-primary">Description</h6>
                     <p>@Model.Description</p>
-                    <br/>
+                    <br />
                     <h6 class="m-0 font-weight-bold text-primary">Status</h6>
                     <p>@Model.Status</p>
                 </div>
             </div>
 
-
+            <!--Ticket Attachment Section-->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Attachments</h6>
@@ -44,15 +45,46 @@
             </div>
 
         </div>
-
+        <!--Ticket Comment Section-->
         <div class="col-lg-6">
 
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Comments</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Comments (@Model.TicketComments.Count)</h6>
                 </div>
                 <div class="card-body">
+                    <p>Add a Comment</p>
+                    <!--Form to add a new comment-->
+                    @using (Html.BeginForm("CreateComment", "Ticket"))
+                    {
+                <div class="form-horizontal">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.TicketID)
 
+
+                    @Html.TextAreaFor(model => model.CommentDescription,
+                    new { @rows = "2", @style = "width:100%;max-width:100%;", @class = "form-group" })
+                    @Html.ValidationMessageFor(model => model.CommentDescription, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <input type="submit" value="Add Comment" class="btn btn-default btn-primary" />
+                        </div>
+                    </div>
+                </div>
+                        <hr />
+                    }
+                    <!--Displays all comments for the ticket-->
+                    @{ foreach (var comment in Model.TicketComments)
+                        {
+                            <div class="panel panel-default">
+                                <div class="panel-heading"><img src="https://assets.biola.edu/4396738754672012438/profile_photo/5bf2f55050c5e00001aa9b3c/thumb_cervantes__theodore_51531460728.jpg" style="vertical-align: middle; width: 30px; height: 30px; border-radius: 50%;">    @comment.User.FirstName @comment.User.LastName  - @comment.PostDate</div>
+                                <div class="panel-body">@comment.CommentDescription</div>
+                            </div>
+                        }
+
+                    }
                 </div>
             </div>
 
@@ -61,5 +93,5 @@
     </div>
 
 </div>
-@Scripts.Render("~bundles/jquerycal")
+
 

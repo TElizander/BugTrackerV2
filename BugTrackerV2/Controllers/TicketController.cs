@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace BugTrackerV2.Controllers
 {
@@ -18,7 +19,7 @@ namespace BugTrackerV2.Controllers
         // GET: Ticket
         public ActionResult Index()
         {
-            return View();
+            return View(db.Tickets.ToList());
         }
 
         // GET: Ticket/Details/5
@@ -28,9 +29,9 @@ namespace BugTrackerV2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //Get the  data from the ticket table
+            //Get the data from the ticket table and all comments associated with the ticket
             Ticket ticket = db.Tickets
-                //.Include(c => c.TicketComments)
+                .Include(i => i.TicketComments)
                 .FirstOrDefault(i => i.TicketID == id);
 
             //Map to TicketDetailViewModel
@@ -46,6 +47,8 @@ namespace BugTrackerV2.Controllers
             ticketDetailViewModel.Priority = ticket.Priority;
             ticketDetailViewModel.Status = ticket.Status;
             ticketDetailViewModel.SubmitDate = ticket.SubmitDate;
+
+            ticketDetailViewModel.TicketComments = ticket.TicketComments;
 
             
             return View(ticketDetailViewModel);
@@ -143,6 +146,27 @@ namespace BugTrackerV2.Controllers
             {
                 return View();
             }
+        }
+
+        // POST: Tickets/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost, ActionName("CreateComment")]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateComment([Bind(Include = "TicketID,CommentDescription")] TicketComment ticketComment)
+        {
+            ticketComment.PostDate = System.DateTime.Now;
+            ticketComment.UserID = User.Identity.GetUserId();
+
+                if (ModelState.IsValid)
+                {
+                    db.TicketComments.Add(ticketComment);
+                    db.SaveChanges();
+                    return RedirectToAction("Details", new { id = ticketComment.TicketID });
+                }
+
+
+            return RedirectToAction("Details", new { id = ticketComment.TicketID, ticketComment });
         }
     }
 }

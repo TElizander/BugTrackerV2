@@ -30,6 +30,10 @@ namespace BugTrackerV2
             bundles.Add(new StyleBundle("~/Content/font-sb").Include(
                      "~/Content/all.min.css",
                      "~/Content/sb-admin-2.min.css"));
+
+            bundles.Add(new StyleBundle("~/Content/data-tables").Include(
+                     "~/Content/dataTables.bootstrap4.css",
+                     "~/Content/dataTables.bootstrap4.min.css"));
             //
             bundles.Add(new ScriptBundle("~/bundles/bootstrap-core").Include(
                       "~/Scripts/jquery.min.js",
@@ -40,6 +44,13 @@ namespace BugTrackerV2
 
             bundles.Add(new ScriptBundle("~/bundles/custom-all").Include(
                       "~/Scripts/sb-admin-2.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/data-tables").Include(
+                            "~/Scripts/jquery.dataTables.js",
+                        "~/Scripts/jquery.dataTables.min.js",
+                        "~/Scripts/datatables-demo.js",
+                        "~/Scripts/dataTables.bootstrap4.js",
+                        "~/Scripts/dataTables.bootstrap4.min.js"));
         }
     }
 }
