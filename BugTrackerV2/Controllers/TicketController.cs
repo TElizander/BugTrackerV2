@@ -17,9 +17,15 @@ namespace BugTrackerV2.Controllers
         private  ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Ticket
-        public ActionResult Index()
+        public ActionResult Index(string? SubmitterId)
         {
-            return View(db.Tickets.ToList());
+            //Check if a SubmitterId was passed, if not, send all tickets, if it was, send only ticketrs where the submitter id matches
+            var ticketList = SubmitterId == null ? 
+                db.Tickets.ToList() : 
+                db.Tickets.ToList().Where(i => i.SubmitterID == SubmitterId);
+
+
+            return View(ticketList);
         }
 
         // GET: Ticket/Details/5
