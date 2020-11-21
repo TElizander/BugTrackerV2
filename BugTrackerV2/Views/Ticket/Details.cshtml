@@ -43,7 +43,7 @@
                     @{
                         foreach (var file in Model.TicketAttachments)
                         {
-                            @Html.ActionLink(file.FileName, "DownloadTicketFile", "Ticket", new { fileName = file.FileName }, new { @class = "standout-link", @target = "_blank" })
+                            @Html.ActionLink(file.FileName, "DownloadTicketFile", "Ticket", new { fileName = file.FileName, ticketId = Model.TicketID }, new { @class = "standout-link", @target = "_blank" })
                         }
                     }
                 </div>

@@ -90,7 +90,8 @@ namespace BugTrackerV2.Controllers
                         TicketAttachment ticketAttachment = new TicketAttachment();
 
                         string _FileName = Path.GetFileName(file.FileName);
-                        string _path = Path.Combine(Server.MapPath("~/UploadedFiles"), _FileName);
+                        string _directory = Server.MapPath("~/UploadedFiles/" + ticket.TicketID);
+                        string _path = Path.Combine(Server.MapPath("~/UploadedFiles/" + ticket.TicketID), _FileName);
 
                         ticketAttachment.TicketID = ticket.TicketID;
                         ticketAttachment.UserID = User.Identity.GetUserId();
@@ -100,7 +101,9 @@ namespace BugTrackerV2.Controllers
                         db.TicketAttachments.Add(ticketAttachment);
                         db.SaveChanges();
 
+                        System.IO.Directory.CreateDirectory(_directory);
                         file.SaveAs(_path);
+
                     }
                     ViewBag.Message = "File Uploaded Successfully";
                 }
@@ -177,6 +180,11 @@ namespace BugTrackerV2.Controllers
 
 
             return RedirectToAction("Details", new { id = ticketComment.TicketID, ticketComment });
+        }
+
+        public FilePathResult DownloadTicketFile(string fileName, int ticketId)
+        {
+            return new FilePathResult(@"~/UploadedFiles/" + ticketId.ToString() + "/" + fileName, MimeMapping.GetMimeMapping(fileName));
         }
     }
 }
