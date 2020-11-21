@@ -12,6 +12,7 @@ using System.Data.Entity;
 
 namespace BugTrackerV2.Controllers
 {
+    [Authorize]
     public class TicketController : Controller
     {
         private  ApplicationDbContext db = new ApplicationDbContext();
@@ -38,6 +39,7 @@ namespace BugTrackerV2.Controllers
             //Get the data from the ticket table and all comments associated with the ticket
             Ticket ticket = db.Tickets
                 .Include(i => i.TicketComments)
+                .Include(i => i.TicketAttachments)
                 .FirstOrDefault(i => i.TicketID == id);
 
             //Map to TicketDetailViewModel
@@ -55,6 +57,7 @@ namespace BugTrackerV2.Controllers
             ticketDetailViewModel.SubmitDate = ticket.SubmitDate;
 
             ticketDetailViewModel.TicketComments = ticket.TicketComments;
+            ticketDetailViewModel.TicketAttachments = ticket.TicketAttachments;
 
             
             return View(ticketDetailViewModel);
@@ -91,11 +94,12 @@ namespace BugTrackerV2.Controllers
 
                         ticketAttachment.TicketID = ticket.TicketID;
                         ticketAttachment.UserID = User.Identity.GetUserId();
-                        ticketAttachment.FileName = file.FileName;
+                        ticketAttachment.FileName = Path.GetFileName(file.FileName);
+                        ticketAttachment.FileLocation = _path;
                         ticketAttachment.AttachedDate = System.DateTime.Now;
-
                         db.TicketAttachments.Add(ticketAttachment);
                         db.SaveChanges();
+
                         file.SaveAs(_path);
                     }
                     ViewBag.Message = "File Uploaded Successfully";
