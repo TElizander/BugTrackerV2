@@ -184,7 +184,10 @@ namespace BugTrackerV2.Controllers
 
         public FilePathResult DownloadTicketFile(string fileName, int ticketId)
         {
-            return new FilePathResult(@"~/UploadedFiles/" + ticketId.ToString() + "/" + fileName, MimeMapping.GetMimeMapping(fileName));
+            return new FilePathResult(@"~/UploadedFiles/" + ticketId.ToString() + "/" + fileName, MimeMapping.GetMimeMapping(fileName))
+            { 
+                FileDownloadName = fileName
+            };
         }
     }
 }
